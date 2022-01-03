@@ -5,6 +5,7 @@ import org.pcap4j.core.PcapHandle
 import org.pcap4j.core.PcapNetworkInterface
 import org.pcap4j.core.PcapNetworkInterface.PromiscuousMode
 import org.pcap4j.core.Pcaps
+import org.openpacketsniffer.SnifferStats
 import java.net.InetAddress
 
 
@@ -28,12 +29,6 @@ fun main() {
     }
 
 
-    handleReport(handle)
+    SnifferStats.getReport(handle)
 
-}
-
-fun handleReport(handle : PcapHandle){
-    println("Packets Received: " + handle.stats.numPacketsReceived)
-    println("Packets Dropped: " + handle.stats.numPacketsDropped)
-    println("Packets If Dropped: " + handle.stats.numPacketsDroppedByIf)
 }

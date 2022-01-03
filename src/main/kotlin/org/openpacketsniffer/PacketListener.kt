@@ -1,7 +1,6 @@
 package org.openpacketsniffer
 import org.openpacketsniffer.packethandlers.IpPacketHandler
 import org.pcap4j.core.PacketListener
-import org.pcap4j.packet.AbstractPacket
 import org.pcap4j.packet.IpV4Packet
 import org.pcap4j.packet.IpV6Packet
 import org.pcap4j.packet.Packet
