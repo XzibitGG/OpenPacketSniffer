@@ -8,12 +8,12 @@ class IpPacketHandler(){
     companion object {
 
         fun handle(packet : IpV4Packet){
-            addPacketStat(packet.header.srcAddr.hostAddress)
+            addPacketStat(packet.header.srcAddr.hostName)
 
         }
 
         fun handle(packet : IpV6Packet){
-            addPacketStat(packet.header.srcAddr.hostAddress)
+            addPacketStat(packet.header.srcAddr.hostName)
         }
 
 

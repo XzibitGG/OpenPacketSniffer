@@ -4,9 +4,11 @@ import org.pcap4j.core.PcapHandle
 
 object SnifferStats {
 
-    private var packetStats : HashMap<String, Int> = HashMap<String, Int>()
+    private var packetStats : HashMap<String, Int> = HashMap()
+    private var Logger = org.apache.log4j.Logger.getLogger("Packet Stats")
 
     fun addPacketStat(K : String){
+        if(K !in packetStats) Logger.info("Handled Packet from $K")
         packetStats[K] = (packetStats[K] ?: 0) + 1
     }
 
