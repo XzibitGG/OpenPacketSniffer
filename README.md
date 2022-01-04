@@ -28,20 +28,22 @@ When a packet is sniffed, the logger will only print if the src address' DNS ent
 XXXX [main] INFO  Packet Stats  - Handled Packet from some.example.source
 ```
 Every minute, a snapshot of all packets will be logged in the following format
-```yaml
+```json
 ...
-From [some_source] -> (<index of packet>, [
-                            ...
-                            (
-                                <header bytes enocded>, 
-                                <header bytes decoded>
-                            ),
-                            (
-                                <payload bytes enocded>, 
-                                <payload bytes decoded>
-                            )
-                            ...
-                        ]
-                    )
+  "some_source" : [
+    {
+    "index": 0,
+    "data": {
+            "header": {
+                "encoded": "encoded_data",
+                "decoded": "decoded_data"
+            },
+            "payload": {
+                "encoded": "encoded_data",
+                "decoded": "decoded_data"
+            }
+        }
+    }
+]
 ...
 ```

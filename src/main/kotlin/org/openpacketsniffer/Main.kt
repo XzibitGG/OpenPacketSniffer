@@ -27,7 +27,7 @@ fun main() {
         name = "Stat logger",
         initialDelay = 100, period = 100000
     ) {
-        SnifferStats.getReport(handle)
+        SnifferStats.getReport()
     }
 
     try {
