@@ -29,7 +29,6 @@ XXXX [main] INFO  Packet Stats  - Handled Packet from some.example.source
 ```
 Every minute, a snapshot of all packets will be logged in the following format
 ```json
-...
   "some_source" : [
     {
     "index": 0,
@@ -45,5 +44,4 @@ Every minute, a snapshot of all packets will be logged in the following format
         }
     }
 ]
-...
 ```
