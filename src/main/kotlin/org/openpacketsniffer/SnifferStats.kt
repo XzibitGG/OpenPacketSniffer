@@ -4,10 +4,16 @@ import org.pcap4j.core.PcapHandle
 
 object SnifferStats {
 
-    private var packetStats: HashMap<String, Pair<Int, Pair<
-                Pair<String, String>,
-                Pair<String, String>
-                >>> = HashMap()
+    private var packetStats: HashMap<String,
+                ArrayList<
+                    Pair<Int,
+                        Pair<
+                            Pair<String, String>,
+                            Pair<String, String>
+                            >
+                    >
+                >
+            > = HashMap()
     private var Logger = org.apache.log4j.Logger.getLogger("Packet Stats")
 
     fun addPacketStat(
@@ -19,8 +25,14 @@ object SnifferStats {
     ) {
         if (K !in packetStats) {
             Logger.info("Handled Packet from $K")
+            packetStats[K] = ArrayList()
         }
-        packetStats[K] = Pair((packetStats[K]?.first ?: 0) + 1, V)
+        packetStats[K]?.add(
+            Pair(
+                    (packetStats[K]?.size ?: 0),
+                        V
+                    )
+                )
     }
 
     fun getReport(handle: PcapHandle) {
