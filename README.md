@@ -22,7 +22,7 @@ const val PACKET_COUNT = 100
 
 Everytime a IPv4 or 1Pv6 packet is received/sent, the PacketListener will log both the encoded and decoded bytes of the payload and header, replacing all not printable characters with "."
 
-When a packet is sniffed, the logger will only print if the src address has not had it's DNS entry cached. When it is, the following will be logged
+When a packet is sniffed, the logger will only print if the src address' DNS entry wasn't cached. When it is, the following will be logged
 
 ```yaml
 XXXX [main] INFO  Packet Stats  - Handled Packet from some.example.source
