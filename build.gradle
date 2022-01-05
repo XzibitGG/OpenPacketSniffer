@@ -3,7 +3,25 @@ plugins {
     id 'org.jetbrains.kotlin.jvm' version '1.5.31'
     id "com.diffplug.gradle.spotless" version "4.5.1"
     id 'application'
-    id "org.jlleitschuh.gradle.ktlint" version "10.2.1"
+}
+
+configurations {
+    ktlint
+}
+
+dependencies {
+    ktlint("com.pinterest:ktlint:0.40.0") {
+        attributes {
+            attribute(Bundling.BUNDLING_ATTRIBUTE, getObjects().named(Bundling, Bundling.EXTERNAL))
+        }
+    }
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib"
+    implementation 'com.google.code.gson:gson:2.8.9'
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    compile 'org.pcap4j:pcap4j-core:1.8.2'
+    compile 'org.pcap4j:pcap4j-packetfactory-static:1.8.2'
+    compile group: 'org.slf4j', name: 'slf4j-log4j12', version: '1.7.29'
 }
 
 
@@ -17,20 +35,17 @@ repositories {
 application {
     mainClassName = group + ".MainKt"
 }
-allprojects{
-    spotless{
-        kotlin {
-            target '**/*.kt'
-            ktlint()
-        }
-    }
+task ktlint(type: JavaExec, group: "verification") {
+    description = "Check Kotlin code style."
+    classpath = configurations.ktlint
+    main = "com.pinterest.ktlint.Main"
+    args "src/**/*.kt"
 }
+check.dependsOn ktlint
 
-dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib"
-    implementation 'com.google.code.gson:gson:2.8.9'
-    testCompile group: 'junit', name: 'junit', version: '4.12'
-    compile 'org.pcap4j:pcap4j-core:1.8.2'
-    compile 'org.pcap4j:pcap4j-packetfactory-static:1.8.2'
-    compile group: 'org.slf4j', name: 'slf4j-log4j12', version: '1.7.29'
+task ktlintFormat(type: JavaExec, group: "formatting") {
+    description = "Fix Kotlin code style deviations."
+    classpath = configurations.ktlint
+    main = "com.pinterest.ktlint.Main"
+    args "-F", "src/**/*.kt"
 }

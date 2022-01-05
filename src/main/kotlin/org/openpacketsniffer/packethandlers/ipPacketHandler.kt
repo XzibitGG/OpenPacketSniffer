@@ -13,11 +13,11 @@ class IpPacketHandler() {
         }
 
         fun handle(packet: IpV4Packet) {
-            addPacketStat(packet.header.srcAddr.hostName, PacketTypePair(getInfo(packet.header.rawData), getInfo(packet.payload.rawData)))
+            addPacketStat(packet.header.srcAddr, PacketTypePair(getInfo(packet.header.rawData), getInfo(packet.payload.rawData)))
         }
 
         fun handle(packet: IpV6Packet) {
-            addPacketStat(packet.header.srcAddr.hostName, PacketTypePair(getInfo(packet.header.rawData), getInfo(packet.payload.rawData)))
+            addPacketStat(packet.header.srcAddr, PacketTypePair(getInfo(packet.header.rawData), getInfo(packet.payload.rawData)))
         }
     }
 }
