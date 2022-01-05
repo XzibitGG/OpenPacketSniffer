@@ -21,8 +21,7 @@ data class DNSPair<out A, out B>(
     val domainName: B
 ) : Serializable{
     override fun toString(): String {
-        if(ipAddress == domainName) return "$ipAddress"
-
+        if(ipAddress == domainName || domainName.toString().isEmpty()) return "$ipAddress"
         return "$ipAddress, $domainName"
     }
 
